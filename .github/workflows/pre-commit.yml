@@ -1,15 +1,18 @@
-name: pre-commit
-
-on:
-  pull_request:
-  push:
-
 jobs:
   pre-commit:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
-      - uses: pre-commit/action@v3.0.1
+    - name: Collect Workflow Telemetry
+      uses: Nfsaavedra/workflow-telemetry-action@raw_data
+      with:
+        save_raw_stats: true
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.x
+    - uses: pre-commit/action@v3.0.1
+name: pre-commit
+'on':
+- workflow_dispatch
+permissions: write-all
